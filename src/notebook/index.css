@@ -14,7 +14,7 @@
   --jp-private-notebook-dragImage-circleRadius: 20px;
   --jp-private-notebook-selected-color: var(--md-blue-400);
   --jp-private-notebook-multiselected-color: var(--md-blue-50);
-  --jp-private-notebook-left-border-width: 5px;
+  --jp-private-notebook-left-border-width: 16px;
   --jp-private-notebook-active-color: var(--md-green-400);
 }
 
@@ -32,7 +32,7 @@
 
 
 .jp-Notebook {
-  padding-left: var(--jp-notebook-padding);
+  padding-left: 0;
   padding-right: var(--jp-notebook-padding);
   padding-top: var(--jp-notebook-padding);
   padding-bottom: calc( 4 * var(--jp-notebook-padding) );
@@ -60,24 +60,25 @@
 
 
 .jp-Notebook .jp-Cell.jp-Notebook-cell {
-  overflow: visible
+  overflow: visible;
+  padding-left: 0px;
 }
 
 
 .jp-Notebook.jp-mod-commandMode .jp-Notebook-cell.jp-mod-active.jp-mod-selected {
-  border-color: var(--jp-notebook-cell-border-color);
 }
 
 
-.jp-Notebook.jp-mod-commandMode .jp-Notebook-cell.jp-mod-active.jp-mod-selected:before {
+.jp-Notebook.jp-mod-commandMode .jp-Notebook-cell.jp-mod-active.jp-mod-selected .jp-Cell-prompt:before {
   position: absolute;
   display: block;
   top: calc( -1 * var(--jp-border-width) );
   left: calc( -1 * var(--jp-border-width) );
   width: var(--jp-private-notebook-left-border-width);
-  height: calc( 100% + calc( 2 * var(--jp-border-width) ) );
+  height: calc( 100% + calc( 4 * var(--jp-border-width) ) );
   content: '';
   background: var(--jp-private-notebook-selected-color);
+  box-shadow: 3px 0px 11px -2px rgba(0,0,0,0.5);
 }
 
 
@@ -92,20 +93,21 @@
 
 
 
-.jp-Notebook.jp-mod-editMode .jp-Notebook-cell.jp-mod-active {
-  border-color: var(--jp-private-notebook-active-color);
+.jp-Notebook.jp-mod-editMode .jp-Notebook-cell.jp-mod-active .jp-CellEditor {
+  border-color: var(--md-blue-500);
 }
 
 
-.jp-Notebook.jp-mod-editMode .jp-Notebook-cell.jp-mod-active:before {
+.jp-Notebook.jp-mod-editMode .jp-Notebook-cell.jp-mod-active .jp-Cell-prompt:before {
   position: absolute;
   display: block;
   top: calc( -1 * var(--jp-border-width) );
   left: calc( -1 * var(--jp-border-width) );
   width: var(--jp-private-notebook-left-border-width);
-  height: calc( 100% + calc( 2 * var(--jp-border-width) ) );
+  height: calc( 100% + calc( 4 * var(--jp-border-width) ) );
   content: '';
-  background: var(--jp-private-notebook-active-color);
+  background: var(--jp-private-notebook-selected-color);
+  box-shadow: 3px 0px 11px -2px rgba(0,0,0,0.5);
 }
 
 

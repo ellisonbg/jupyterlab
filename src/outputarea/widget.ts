@@ -636,7 +636,7 @@ namespace OutputAreaWidget {
       if (value === null) {
         this.node.textContent = '';
       } else {
-         this.node.textContent = `Out[${value}]:`;
+         this.node.textContent = `[${value}]:`;
       }
     }
 

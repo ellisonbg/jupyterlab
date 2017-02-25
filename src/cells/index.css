@@ -35,7 +35,11 @@
   opacity: var(--jp-cell-prompt-opacity);
   line-height: var(--jp-code-line-height);
   font-size: var(--jp-code-font-size);
-  border: var(--jp-border-width) solid transparent;
+  border-top: var(--jp-border-width) solid transparent;
+  border-bottom: var(--jp-border-width) solid transparent;
+  border-left: none;
+  border-right: none;
+  overflow: visible;
 }
 
 
@@ -70,6 +74,7 @@
 .jp-InputArea {
   display: flex;
   flex-direction: row;
+  overflow: visible;
 }
 
 

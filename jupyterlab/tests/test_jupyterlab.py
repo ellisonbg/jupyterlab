@@ -114,18 +114,18 @@ class TestExtension(TestCase):
         for modulename in self._mock_extensions:
             sys.modules.pop(modulename)
 
-    # def test_install_extension(self):
-    #     install_extension(self.source_dir)
-    #     path = pjoin(self.app_dir, 'extensions', '*python-tests*.tgz')
-    #     assert glob.glob(path)
-    #     assert '@jupyterlab/python-tests' in _get_extensions(self.app_dir)
+    def test_install_extension(self):
+        install_extension(self.source_dir)
+        path = pjoin(self.app_dir, 'extensions', '*python-tests*.tgz')
+        assert glob.glob(path)
+        assert '@jupyterlab/python-tests' in _get_extensions(self.app_dir)
 
-    # def test_install_twice(self):
-    #     install_extension(self.source_dir)
-    #     path = pjoin(commands.get_app_dir(), 'extensions', '*python-tests*.tgz')
-    #     install_extension(self.source_dir)
-    #     assert glob.glob(path)
-    #     assert '@jupyterlab/python-tests' in _get_extensions(self.app_dir)
+    def test_install_twice(self):
+        install_extension(self.source_dir)
+        path = pjoin(commands.get_app_dir(), 'extensions', '*python-tests*.tgz')
+        install_extension(self.source_dir)
+        assert glob.glob(path)
+        assert '@jupyterlab/python-tests' in _get_extensions(self.app_dir)
 
     def test_install_mime_renderer(self):
         install_extension(self.mime_renderer_dir)
@@ -134,46 +134,46 @@ class TestExtension(TestCase):
         uninstall_extension('@jupyterlab/mime-extension-test')
         assert '@jupyterlab/mime-extension-test' not in _get_extensions(self.app_dir)
 
-    # def test_install_incompatible(self):
-    #     with pytest.raises(ValueError):
-    #         install_extension(self.incompat_dir)
+    def test_install_incompatible(self):
+        with pytest.raises(ValueError):
+            install_extension(self.incompat_dir)
 
-    # def test_install_failed(self):
-    #     path = self.mock_package
-    #     with pytest.raises(ValueError):
-    #         install_extension(path)
-    #     with open(pjoin(path, 'package.json')) as fid:
-    #         data = json.load(fid)
-    #     assert not data['name'] in _get_extensions(self.app_dir)
+    def test_install_failed(self):
+        path = self.mock_package
+        with pytest.raises(ValueError):
+            install_extension(path)
+        with open(pjoin(path, 'package.json')) as fid:
+            data = json.load(fid)
+        assert not data['name'] in _get_extensions(self.app_dir)
 
-    # def test_uninstall_extension(self):
-    #     install_extension(self.source_dir)
-    #     uninstall_extension('@jupyterlab/python-tests')
-    #     path = pjoin(self.app_dir, 'extensions', '*python_tests*.tgz')
-    #     assert not glob.glob(path)
-    #     assert '@jupyterlab/python-tests' not in _get_extensions(self.app_dir)
+    def test_uninstall_extension(self):
+        install_extension(self.source_dir)
+        uninstall_extension('@jupyterlab/python-tests')
+        path = pjoin(self.app_dir, 'extensions', '*python_tests*.tgz')
+        assert not glob.glob(path)
+        assert '@jupyterlab/python-tests' not in _get_extensions(self.app_dir)
 
-    # def test_uninstall_core_extension(self):
-    #     uninstall_extension('@jupyterlab/console-extension')
-    #     app_dir = self.app_dir
-    #     _ensure_package(app_dir)
-    #     with open(pjoin(app_dir, 'staging', 'package.json')) as fid:
-    #         data = json.load(fid)
-    #     extensions = data['jupyterlab']['extensions']
-    #     assert '@jupyterlab/console-extension' not in extensions
+    def test_uninstall_core_extension(self):
+        uninstall_extension('@jupyterlab/console-extension')
+        app_dir = self.app_dir
+        _ensure_package(app_dir)
+        with open(pjoin(app_dir, 'staging', 'package.json')) as fid:
+            data = json.load(fid)
+        extensions = data['jupyterlab']['extensions']
+        assert '@jupyterlab/console-extension' not in extensions
 
-    #     install_extension('@jupyterlab/console-extension')
-    #     _ensure_package(app_dir)
-    #     with open(pjoin(app_dir, 'staging', 'package.json')) as fid:
-    #         data = json.load(fid)
-    #     extensions = data['jupyterlab']['extensions']
-    #     assert '@jupyterlab/console-extension' in extensions
+        install_extension('@jupyterlab/console-extension')
+        _ensure_package(app_dir)
+        with open(pjoin(app_dir, 'staging', 'package.json')) as fid:
+            data = json.load(fid)
+        extensions = data['jupyterlab']['extensions']
+        assert '@jupyterlab/console-extension' in extensions
 
-    # def test_link_extension(self):
-    #     link_package(self.source_dir)
-    #     linked = _get_linked_packages().keys()
-    #     assert '@jupyterlab/python-tests' in linked
-    #     assert '@jupyterlab/python-tests' in _get_extensions(self.app_dir)
+    def test_link_extension(self):
+        link_package(self.source_dir)
+        linked = _get_linked_packages().keys()
+        assert '@jupyterlab/python-tests' in linked
+        assert '@jupyterlab/python-tests' in _get_extensions(self.app_dir)
 
     def test_link_mime_renderer(self):
         link_package(self.mime_renderer_dir)
@@ -186,166 +186,166 @@ class TestExtension(TestCase):
         assert '@jupyterlab/mime-extension-test' not in linked
         assert '@jupyterlab/mime-extension-test' not in _get_extensions(self.app_dir)
 
-    # def test_link_package(self):
-    #     path = self.mock_package
-    #     link_package(path)
-    #     linked = _get_linked_packages().keys()
-    #     with open(pjoin(path, 'package.json')) as fid:
-    #         data = json.load(fid)
-    #     assert data['name'] in linked
-    #     assert not data['name'] in _get_extensions(self.app_dir)
-    #     unlink_package(path)
-    #     linked = _get_linked_packages().keys()
-    #     assert not data['name'] in linked
+    def test_link_package(self):
+        path = self.mock_package
+        link_package(path)
+        linked = _get_linked_packages().keys()
+        with open(pjoin(path, 'package.json')) as fid:
+            data = json.load(fid)
+        assert data['name'] in linked
+        assert not data['name'] in _get_extensions(self.app_dir)
+        unlink_package(path)
+        linked = _get_linked_packages().keys()
+        assert not data['name'] in linked
 
-    # def test_link_incompatible(self):
-    #     with pytest.raises(ValueError):
-    #         install_extension(self.incompat_dir)
+    def test_link_incompatible(self):
+        with pytest.raises(ValueError):
+            install_extension(self.incompat_dir)
 
-    # def test_unlink_package(self):
-    #     target = self.source_dir
-    #     link_package(target)
-    #     unlink_package(target)
-    #     linked = _get_linked_packages().keys()
-    #     assert '@jupyterlab/python-tests' not in linked
-    #     assert '@jupyterlab/python-tests' not in _get_extensions(self.app_dir)
+    def test_unlink_package(self):
+        target = self.source_dir
+        link_package(target)
+        unlink_package(target)
+        linked = _get_linked_packages().keys()
+        assert '@jupyterlab/python-tests' not in linked
+        assert '@jupyterlab/python-tests' not in _get_extensions(self.app_dir)
 
-    # def test_list_extensions(self):
-    #     install_extension(self.source_dir)
-    #     list_extensions()
+    def test_list_extensions(self):
+        install_extension(self.source_dir)
+        list_extensions()
 
-    # def test_app_dir(self):
-    #     app_dir = self.tempdir()
+    def test_app_dir(self):
+        app_dir = self.tempdir()
 
-    #     install_extension(self.source_dir, app_dir)
-    #     path = pjoin(app_dir, 'extensions', '*python-tests*.tgz')
-    #     assert glob.glob(path)
-    #     assert '@jupyterlab/python-tests' in _get_extensions(app_dir)
+        install_extension(self.source_dir, app_dir)
+        path = pjoin(app_dir, 'extensions', '*python-tests*.tgz')
+        assert glob.glob(path)
+        assert '@jupyterlab/python-tests' in _get_extensions(app_dir)
 
-    #     uninstall_extension('@jupyterlab/python-tests', app_dir)
-    #     path = pjoin(app_dir, 'extensions', '*python-tests*.tgz')
-    #     assert not glob.glob(path)
-    #     assert '@jupyterlab/python-tests' not in _get_extensions(app_dir)
+        uninstall_extension('@jupyterlab/python-tests', app_dir)
+        path = pjoin(app_dir, 'extensions', '*python-tests*.tgz')
+        assert not glob.glob(path)
+        assert '@jupyterlab/python-tests' not in _get_extensions(app_dir)
 
-    #     link_package(self.source_dir, app_dir)
-    #     linked = _get_linked_packages(app_dir).keys()
-    #     assert '@jupyterlab/python-tests' in linked
+        link_package(self.source_dir, app_dir)
+        linked = _get_linked_packages(app_dir).keys()
+        assert '@jupyterlab/python-tests' in linked
 
-    #     unlink_package(self.source_dir, app_dir)
-    #     linked = _get_linked_packages(app_dir).keys()
-    #     assert '@jupyterlab/python-tests' not in linked
+        unlink_package(self.source_dir, app_dir)
+        linked = _get_linked_packages(app_dir).keys()
+        assert '@jupyterlab/python-tests' not in linked
 
-    # def test_app_dir_use_sys_prefix(self):
-    #     app_dir = self.tempdir()
-    #     if os.path.exists(self.app_dir):
-    #         os.removedirs(self.app_dir)
+    def test_app_dir_use_sys_prefix(self):
+        app_dir = self.tempdir()
+        if os.path.exists(self.app_dir):
+            os.removedirs(self.app_dir)
 
-    #     install_extension(self.source_dir)
-    #     path = pjoin(app_dir, 'extensions', '*python-tests*.tgz')
-    #     assert not glob.glob(path)
-    #     assert '@jupyterlab/python-tests' in _get_extensions(app_dir)
+        install_extension(self.source_dir)
+        path = pjoin(app_dir, 'extensions', '*python-tests*.tgz')
+        assert not glob.glob(path)
+        assert '@jupyterlab/python-tests' in _get_extensions(app_dir)
 
-    # def test_app_dir_shadowing(self):
-    #     app_dir = self.tempdir()
-    #     sys_dir = self.app_dir
-    #     if os.path.exists(sys_dir):
-    #         os.removedirs(sys_dir)
+    def test_app_dir_shadowing(self):
+        app_dir = self.tempdir()
+        sys_dir = self.app_dir
+        if os.path.exists(sys_dir):
+            os.removedirs(sys_dir)
 
-    #     install_extension(self.source_dir)
-    #     sys_path = pjoin(sys_dir, 'extensions', '*python-tests*.tgz')
-    #     assert glob.glob(sys_path)
-    #     app_path = pjoin(app_dir, 'extensions', '*python-tests*.tgz')
-    #     assert not glob.glob(app_path)
-    #     assert '@jupyterlab/python-tests' in _get_extensions(app_dir)
+        install_extension(self.source_dir)
+        sys_path = pjoin(sys_dir, 'extensions', '*python-tests*.tgz')
+        assert glob.glob(sys_path)
+        app_path = pjoin(app_dir, 'extensions', '*python-tests*.tgz')
+        assert not glob.glob(app_path)
+        assert '@jupyterlab/python-tests' in _get_extensions(app_dir)
 
-    #     install_extension(self.source_dir, app_dir)
-    #     assert glob.glob(app_path)
-    #     assert '@jupyterlab/python-tests' in _get_extensions(app_dir)
+        install_extension(self.source_dir, app_dir)
+        assert glob.glob(app_path)
+        assert '@jupyterlab/python-tests' in _get_extensions(app_dir)
 
-    #     uninstall_extension('@jupyterlab/python-tests', app_dir)
-    #     assert not glob.glob(app_path)
-    #     assert glob.glob(sys_path)
-    #     assert '@jupyterlab/python-tests' in _get_extensions(app_dir)
+        uninstall_extension('@jupyterlab/python-tests', app_dir)
+        assert not glob.glob(app_path)
+        assert glob.glob(sys_path)
+        assert '@jupyterlab/python-tests' in _get_extensions(app_dir)
 
-    #     uninstall_extension('@jupyterlab/python-tests', app_dir)
-    #     assert not glob.glob(app_path)
-    #     assert not glob.glob(sys_path)
-    #     assert '@jupyterlab/python-tests' not in _get_extensions(app_dir)
+        uninstall_extension('@jupyterlab/python-tests', app_dir)
+        assert not glob.glob(app_path)
+        assert not glob.glob(sys_path)
+        assert '@jupyterlab/python-tests' not in _get_extensions(app_dir)
 
-    # def test_build(self):
-    #     install_extension(self.source_dir)
-    #     build()
-    #     # check staging directory.
-    #     entry = pjoin(self.app_dir, 'staging', 'build', 'index.out.js')
-    #     with open(entry) as fid:
-    #         data = fid.read()
-    #     assert '@jupyterlab/python-tests' in data
+    def test_build(self):
+        install_extension(self.source_dir)
+        build()
+        # check staging directory.
+        entry = pjoin(self.app_dir, 'staging', 'build', 'index.out.js')
+        with open(entry) as fid:
+            data = fid.read()
+        assert '@jupyterlab/python-tests' in data
 
-    #     # check static directory.
-    #     entry = pjoin(self.app_dir, 'static', 'index.out.js')
-    #     with open(entry) as fid:
-    #         data = fid.read()
-    #     assert '@jupyterlab/python-tests' in data
+        # check static directory.
+        entry = pjoin(self.app_dir, 'static', 'index.out.js')
+        with open(entry) as fid:
+            data = fid.read()
+        assert '@jupyterlab/python-tests' in data
 
-    # def test_build_custom(self):
-    #     install_extension(self.source_dir)
-    #     build(name='foo', version='1.0')
+    def test_build_custom(self):
+        install_extension(self.source_dir)
+        build(name='foo', version='1.0')
 
-    #     # check static directory.
-    #     entry = pjoin(self.app_dir, 'static', 'index.out.js')
-    #     with open(entry) as fid:
-    #         data = fid.read()
-    #     assert '@jupyterlab/python-tests' in data
+        # check static directory.
+        entry = pjoin(self.app_dir, 'static', 'index.out.js')
+        with open(entry) as fid:
+            data = fid.read()
+        assert '@jupyterlab/python-tests' in data
 
-    #     pkg = pjoin(self.app_dir, 'static', 'package.json')
-    #     with open(pkg) as fid:
-    #         data = json.load(fid)
-    #     assert data['jupyterlab']['name'] == 'foo'
-    #     assert data['jupyterlab']['version'] == '1.0'
+        pkg = pjoin(self.app_dir, 'static', 'package.json')
+        with open(pkg) as fid:
+            data = json.load(fid)
+        assert data['jupyterlab']['name'] == 'foo'
+        assert data['jupyterlab']['version'] == '1.0'
 
-    # def test_load_extension(self):
-    #     app = NotebookApp()
-    #     stderr = sys.stderr
-    #     sys.stderr = self.devnull
-    #     app.initialize()
-    #     sys.stderr = stderr
-    #     load_jupyter_server_extension(app)
+    def test_load_extension(self):
+        app = NotebookApp()
+        stderr = sys.stderr
+        sys.stderr = self.devnull
+        app.initialize()
+        sys.stderr = stderr
+        load_jupyter_server_extension(app)
 
-    # def test_disable_extension(self):
-    #     app_dir = self.tempdir()
-    #     install_extension(self.source_dir, app_dir)
-    #     disable_extension('@jupyterlab/python-tests', app_dir)
-    #     disabled = _get_disabled(app_dir)
-    #     assert '@jupyterlab/python-tests' in disabled
-    #     disable_extension('@jupyterlab/notebook-extension', app_dir)
-    #     disabled = _get_disabled(app_dir)
-    #     assert '@jupyterlab/notebook-extension' in disabled
+    def test_disable_extension(self):
+        app_dir = self.tempdir()
+        install_extension(self.source_dir, app_dir)
+        disable_extension('@jupyterlab/python-tests', app_dir)
+        disabled = _get_disabled(app_dir)
+        assert '@jupyterlab/python-tests' in disabled
+        disable_extension('@jupyterlab/notebook-extension', app_dir)
+        disabled = _get_disabled(app_dir)
+        assert '@jupyterlab/notebook-extension' in disabled
 
-    # def test_enable_extension(self):
-    #     app_dir = self.tempdir()
-    #     install_extension(self.source_dir, app_dir)
-    #     disable_extension('@jupyterlab/python-tests', app_dir)
-    #     enable_extension('@jupyterlab/python-tests', app_dir)
-    #     disabled = _get_disabled(app_dir)
-    #     assert '@jupyterlab/python-tests' not in disabled
+    def test_enable_extension(self):
+        app_dir = self.tempdir()
+        install_extension(self.source_dir, app_dir)
+        disable_extension('@jupyterlab/python-tests', app_dir)
+        enable_extension('@jupyterlab/python-tests', app_dir)
+        disabled = _get_disabled(app_dir)
+        assert '@jupyterlab/python-tests' not in disabled
 
-    # def test_should_build(self):
-    #     assert not should_build()[0]
-    #     install_extension(self.source_dir)
-    #     assert should_build()[0]
-    #     build()
-    #     assert not should_build()[0]
-    #     uninstall_extension('@jupyterlab/python-tests')
-    #     assert should_build()[0]
+    def test_should_build(self):
+        assert not should_build()[0]
+        install_extension(self.source_dir)
+        assert should_build()[0]
+        build()
+        assert not should_build()[0]
+        uninstall_extension('@jupyterlab/python-tests')
+        assert should_build()[0]
 
-    # def test_compatibility(self):
-    #     assert _test_overlap('^0.6.0', '^0.6.1')
-    #     assert _test_overlap('>0.1', '0.6')
-    #     assert _test_overlap('~0.5.0', '~0.5.2')
-    #     assert _test_overlap('0.5.2', '^0.5.0')
+    def test_compatibility(self):
+        assert _test_overlap('^0.6.0', '^0.6.1')
+        assert _test_overlap('>0.1', '0.6')
+        assert _test_overlap('~0.5.0', '~0.5.2')
+        assert _test_overlap('0.5.2', '^0.5.0')
 
-    #     assert not _test_overlap('^0.5.0', '^0.6.0')
-    #     assert not _test_overlap('~1.5.0', '^1.6.0')
+        assert not _test_overlap('^0.5.0', '^0.6.0')
+        assert not _test_overlap('~1.5.0', '^1.6.0')
 
-    #     assert _test_overlap('*', '0.6') is None
-    #     assert _test_overlap('<0.6', '0.1') is None
+        assert _test_overlap('*', '0.6') is None
+        assert _test_overlap('<0.6', '0.1') is None

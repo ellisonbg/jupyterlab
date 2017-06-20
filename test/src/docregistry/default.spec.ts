@@ -4,17 +4,40 @@
 import expect = require('expect.js');
 
 import {
-  Widget
+  Message, MessageLoop
+} from '@phosphor/messaging';
+
+import {
+  PanelLayout, Widget
 } from '@phosphor/widgets';
 
 import {
   ABCWidgetFactory, Base64ModelFactory, DocumentModel,
-  DocumentRegistry, TextModelFactory, Context
+  DocumentRegistry, TextModelFactory, Context,
+  MimeRenderer, MimeRendererFactory
 } from '@jupyterlab/docregistry';
 
 import {
-  createFileContext
+  createFileContext, defaultRenderMime
 } from '../utils';
+
+
+const RENDERMIME = defaultRenderMime();
+
+
+class LogRenderer extends MimeRenderer {
+  methods: string[] = [];
+
+  protected onAfterAttach(msg: Message): void {
+    super.onAfterAttach(msg);
+    this.methods.push('onAfterAttach');
+  }
+
+  protected onUpdateRequest(msg: Message): void {
+    super.onUpdateRequest(msg);
+    this.methods.push('onUpdateRequest');
+  }
+}
 
 
 class WidgetFactory extends ABCWidgetFactory<Widget, DocumentRegistry.IModel> {
@@ -550,4 +573,67 @@ describe('docmanager/default', () => {
 
   });
 
+  describe('MimeRendererFactory', () => {
+
+    describe('#createNew()', () => {
+
+      it('should require a context parameter', () => {
+        let widgetFactory = new MimeRendererFactory({
+          name: 'markdown',
+          fileExtensions: ['.md'],
+          rendermime: RENDERMIME,
+          mimeType: 'text/markdown'
+        });
+        expect(widgetFactory.createNew(context)).to.be.a(MimeRenderer);
+      });
+
+    });
+
+  });
+
+  describe('MimeRenderer', () => {
+
+    describe('#constructor()', () => {
+
+      it('should require options', () => {
+        let widget = new MimeRenderer({
+          context,
+          rendermime: RENDERMIME,
+          mimeType: 'text/markdown',
+          renderTimeout: 1000
+        });
+        expect(widget).to.be.a(MimeRenderer);
+      });
+
+    });
+
+    describe('#onUpdateRequest()', () => {
+
+      it('should update the widget', () => {
+        let widget = new LogRenderer({
+          context,
+          rendermime: RENDERMIME,
+          mimeType: 'text/markdown',
+          renderTimeout: 1000
+        });
+        (context.model.contentChanged as any).emit(void 0);
+        MessageLoop.sendMessage(widget, Widget.Msg.UpdateRequest);
+
+        let layout = widget.layout as PanelLayout;
+        let oldChild = layout.widgets[1];
+
+        MessageLoop.sendMessage(widget, Widget.Msg.UpdateRequest);
+
+        let newChild = layout.widgets[1];
+
+        expect(oldChild).to.not.be(newChild);
+        expect(layout.widgets.length).to.be(2);
+        widget.dispose();
+      });
+
+    });
+
+  });
+
 });
+

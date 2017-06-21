@@ -21,9 +21,9 @@
     "@phosphor/messaging": "^1.2.1",
     "@phosphor/widgets": "^1.3.0",
     "d3": "3.5.17",
-    "vega": "^2.6.1",
+    "vega": "^2.6.3",
     "vega-embed": "^2.2.0",
-    "vega-lite": "^1.0.16"
+    "vega-lite": "^1.2.1"
   },
   "devDependencies": {
     "rimraf": "^2.5.2",

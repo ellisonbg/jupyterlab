@@ -17,6 +17,8 @@ import {
   RenderMime
 } from '@jupyterlab/rendermime';
 
+import '../style/index.css';
+
 /**
  * Import vega-embed in this manner due to how it is exported.
  */
@@ -102,7 +104,10 @@ class RenderedVega extends Widget {
   private _renderVega(): void {
 
     let data = this._model.data.get(this._mimeType) as JSONObject;
-
+    if (this._mode === 'vega-lite') {
+      Private.updateVegaLiteDefaults(data);
+    }
+ 
     let embedSpec = {
       mode: this._mode,
       spec: data
@@ -188,3 +193,32 @@ const extensions: RenderMime.IExtension | RenderMime.IExtension[] = [
 ];
 
 export default extensions;
+
+/**
+ * Namespace for module privates.
+ */
+namespace Private {
+
+  /**
+   * Default cell config for Vega-Lite.
+   */
+  const defaultCellConfig: JSONObject = {
+    "width": 400,
+    "height": 400/1.5
+  }
+
+  /**
+   * Apply the default cell config to the spec in place.
+   * 
+   * #### Notes
+   * This needs to be in-place as the spec contains the data, which may be
+   * very large and shouldn't be copied.
+   */
+  export
+  function updateVegaLiteDefaults(spec: JSONObject) {
+    spec['config'] = spec['config'] || {};
+    let cellObject: JSONObject = ((spec['config'] as JSONObject)['cell'] || {}) as JSONObject;
+    (spec['config'] as JSONObject)['cell'] = {...defaultCellConfig, ...cellObject};
+  }
+
+}

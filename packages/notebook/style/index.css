@@ -103,9 +103,7 @@
 
 .jp-Notebook .jp-Cell.jp-mod-active .jp-Cell-inputCollapser,
 .jp-Notebook .jp-Cell.jp-mod-active .jp-Cell-outputCollapser {
-  border-left: 2px solid var(--jp-brand-color1);
-  border-top: 2px solid var(--jp-brand-color1);
-  border-bottom: 2px solid var(--jp-brand-color1);
+  border-left: 4px solid var(--jp-brand-color1);
 }
 
 

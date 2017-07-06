@@ -4,7 +4,7 @@
 |----------------------------------------------------------------------------*/
 
 :root {
-  --jp-private-collapser-width: 12px;
+  --jp-private-collapser-width: 16px;
 }
 
 .jp-Collapser {
@@ -25,15 +25,13 @@
 }
 
 
-.jp-Cell .jp-Collapser .jp-Collapser-child:hover {
-  opacity: .2;
-  border-left: 2px solid var(--jp-brand-color1);
-  border-top: 2px solid var(--jp-brand-color1);
-  border-bottom: 2px solid var(--jp-brand-color1);
+.jp-Cell .jp-Collapser:hover {
+  opacity: .4;
+  border-left: 4px solid var(--jp-brand-color1);
 }
 
 
-.jp-Cell.jp-mod-active .jp-Collapser-child:hover {
+.jp-Cell.jp-mod-active .jp-Collapser:hover {
   opacity: 1;
   border: none;
 }

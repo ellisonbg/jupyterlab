@@ -28,7 +28,7 @@
 
 .jp-About-body {
   display: flex;
-  font-family: var(--jp-ui-font-family);
+  font-family: var(--jp-content-font-family);
   font-size: var(--jp-ui-font-size1);
   color: var(--jp-ui-font-color1);
   text-align: left;

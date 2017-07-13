@@ -42,16 +42,6 @@ const INPUT_COLLAPSER = 'jp-InputCollapser';
 const OUTPUT_COLLAPSER = 'jp-OutputCollapser';
 
 /**
- * The CSS class added the collapser icon in the collapsed state.
- */
-const COLLAPSED_ICON_CLASS = 'jp-ExpandMoreIcon';
-
-/**
- * The CSS class added the collapser icon in the expanded state.
- */
-const EXPANDED_ICON_CLASS = 'jp-ExpandLessIcon';
-
-/**
  * The CSS class added the collapser child when collapsed.
  */
 const MOD_COLLAPSED_CLASS = 'jp-mod-collapsed';
@@ -87,16 +77,11 @@ abstract class Collapser extends VDomRenderer<null> {
    */
   protected render(): VirtualNode | ReadonlyArray<VirtualNode> {
     let childClass = COLLAPSER_CHILD_CLASS;
-    let iconClass = COLLAPSER_ICON_CLASS;
     if (this.collapsed) {
       childClass += ` ${MOD_COLLAPSED_CLASS}`;
-      iconClass += ` ${COLLAPSED_ICON_CLASS}`;
-    } else {
-      iconClass += ` ${EXPANDED_ICON_CLASS}`;
     }
     return (
       <div className={childClass}  onclick={ (e) => this.handleClick(e) } >
-        <div className={iconClass} />
       </div>
     );
   }

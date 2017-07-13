@@ -27,11 +27,6 @@ const COLLAPSER_CLASS = 'jp-Collapser';
 const COLLAPSER_CHILD_CLASS = 'jp-Collapser-child';
 
 /**
- * The CSS class added to the collapser icon.
- */
-const COLLAPSER_ICON_CLASS = 'jp-Collapser-icon';
-
-/**
  * The CSS class added to input collapsers.
  */
 const INPUT_COLLAPSER = 'jp-InputCollapser';

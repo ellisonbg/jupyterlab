@@ -20,6 +20,7 @@ body {
 /* Sibling imports */
 @import './datagrid.css';
 @import './dockpanel.css';
+@import './fonts.css';
 @import './images.css';
 @import './icons.css';
 @import './menus.css';

@@ -25,12 +25,6 @@ all of MD as it is not optimized for dense, information rich UIs.
 */
 
 
-/*
- * Optional monospace font for input/output prompt.
- */
-@import url('https://fonts.googleapis.com/css?family=Roboto+Mono');
-
-
 :root {
 
   /* Borders
@@ -56,7 +50,7 @@ all of MD as it is not optimized for dense, information rich UIs.
   --jp-ui-font-size2: calc(var(--jp-ui-font-size1)*var(--jp-ui-font-scale-factor));
   --jp-ui-font-size3: calc(var(--jp-ui-font-size2)*var(--jp-ui-font-scale-factor));
 
-  --jp-ui-font-family: Roboto, sans-serif;
+  --jp-ui-font-family: "Roboto", sans-serif;
 
   /* Ensures px perfect FontAwesome icons */
   --jp-ui-icon-font-size: 14px;
@@ -97,17 +91,22 @@ all of MD as it is not optimized for dense, information rich UIs.
   --jp-content-font-size4: calc( var(--jp-content-font-size3)*var(--jp-content-font-scale-factor) );
   --jp-content-font-size5: calc( var(--jp-content-font-size4)*var(--jp-content-font-scale-factor) );
 
-  --jp-content-font-family: Roboto, sans-serif;
+  --jp-content-font-family: "Roboto", sans-serif;
 
-  --jp-content-font-color0: black;
-  --jp-content-font-color1: black;
-  --jp-content-font-color2: var(--md-grey-700);
-  --jp-content-font-color3: var(--md-grey-500);
+  --jp-content-font-color0: rgba(0,0,0,1.0);
+  --jp-content-font-color1: rgba(0,0,0,0.8);
+  --jp-content-font-color2: rgba(0,0,0,0.5);
+  --jp-content-font-color3: rgba(0,0,0,0.3);
+
+  /* Code Fonts
+   *
+   * Content font variables are used for typography of code and other monospaced content.
+   */
 
   --jp-code-font-size: 13px;
   --jp-code-line-height: 1.307;
   --jp-code-padding: 5px;
-  --jp-code-font-family: monospace;
+  --jp-code-font-family: "Source Code Pro", monospace;
 
 
   /* Layout
@@ -163,7 +162,7 @@ all of MD as it is not optimized for dense, information rich UIs.
   --jp-cell-editor-background-edit: var(--jp-ui-layout-color1);
   --jp-cell-editor-border-color-edit: var(--jp-brand-color1);
   --jp-cell-prompt-width: 70px;
-  --jp-cell-prompt-font-family: Roboto, sans-serif;
+  --jp-cell-prompt-font-family: "Roboto", sans-serif;
   --jp-cell-prompt-letter-spacing: 2.4px;
   --jp-cell-prompt-opacity: 1.0;
   --jp-cell-prompt-opacity-not-active: 0.56;

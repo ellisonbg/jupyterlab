@@ -16,6 +16,12 @@ body {
   background: var(--jp-layout-color3);
 }
 
+tt, code, kbd, samp, pre {
+  font-family: var(--jp-code-font-family);
+  font-size: var(--jp-code-font-family);
+  line-height: var(--jp-code-line-height);
+}
+
 
 /* Sibling imports */
 @import './datagrid.css';

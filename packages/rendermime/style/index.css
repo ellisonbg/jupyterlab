@@ -127,7 +127,7 @@
 .jp-RenderedHTMLCommon h1 {
   font-size: var(--jp-content-font-size5);
   line-height: var(--jp-content-heading-line-height);
-  font-weight: 300;
+  font-weight: 400;
   font-style: normal;
   margin: var(--jp-content-heading-margin-top) 0 0 0;
 }
@@ -136,7 +136,7 @@
 .jp-RenderedHTMLCommon h2 {
   font-size: var(--jp-content-font-size4);
   line-height: var(--jp-content-heading-line-height);
-  font-weight: 300;
+  font-weight: 400;
   font-style: normal;
   margin: var(--jp-content-heading-margin-top) 0 0 0;
 }
@@ -163,7 +163,7 @@
 .jp-RenderedHTMLCommon h5 {
   font-size: var(--jp-content-font-size1);
   line-height: var(--jp-content-heading-line-height);
-  font-weight: 500;
+  font-weight: 400;
   font-style: normal;
   margin: var(--jp-content-heading-margin-top) 0 0 0;
 }
@@ -172,7 +172,7 @@
 .jp-RenderedHTMLCommon h6 {
   font-size: var(--jp-content-font-size0);
   line-height: var(--jp-content-heading-line-height);
-  font-weight: 500;
+  font-weight: 400;
   font-style: normal;
   margin: var(--jp-content-heading-margin-top) 0 0 0;
 }

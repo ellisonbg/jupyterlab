@@ -19,8 +19,9 @@ export class NotebookInputCollapser extends InputCollapser {
    */
   protected handleClick(e: React.MouseEvent<HTMLDivElement>): void {
     let nb = this.parent.parent.parent as Notebook;
-    console.log(nb);
+    nb.saveScrollTop()
     super.handleClick(e);
+    nb.restoreScrollTop();
   }
 
 }
@@ -33,8 +34,9 @@ export class NotebookOutputCollapser extends OutputCollapser {
    */
   protected handleClick(e: React.MouseEvent<HTMLDivElement>): void {
     let nb = this.parent.parent.parent as Notebook;
-    console.log(nb);
+    nb.saveScrollTop()
     super.handleClick(e);
+    nb.restoreScrollTop();
   }
 
 }

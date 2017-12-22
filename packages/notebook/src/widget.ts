@@ -957,6 +957,19 @@ class Notebook extends StaticNotebook {
     }
   }
 
+  saveScrollTop(): void {
+    let node = this.node;
+    let ar = node.getBoundingClientRect();
+    this._savedScrollTop = ar.top + ar.height / 2;
+  }
+
+  restoreScrollTop(): void {
+    let position = this._savedScrollTop;
+    if (typeof position === 'number') {
+      this.scrollToPosition(position, 0);
+    }
+  }
+
   /**
    * Handle the DOM events for the widget.
    *
@@ -1592,6 +1605,7 @@ class Notebook extends StaticNotebook {
   private _activeCell: Cell = null;
   private _mode: NotebookMode = 'command';
   private _drag: Drag = null;
+  private _savedScrollTop: number = null;
   private _dragData: { pressX: number, pressY: number, index: number } = null;
   private _activeCellChanged = new Signal<this, Cell>(this);
   private _stateChanged = new Signal<this, IChangedArgs<any>>(this);

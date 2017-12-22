@@ -187,7 +187,7 @@ class Cell extends Widget {
     // Input
     let inputWrapper = this._inputWrapper = new Panel();
     inputWrapper.addClass(CELL_INPUT_WRAPPER_CLASS);
-    let inputCollapser = this._inputCollapser = new InputCollapser();
+    let inputCollapser = this._inputCollapser = contentFactory.createInputCollapser();
     inputCollapser.addClass(CELL_INPUT_COLLAPSER_CLASS);
     let input = this._input = new InputArea({model, contentFactory });
     input.addClass(CELL_INPUT_AREA_CLASS);
@@ -434,6 +434,10 @@ namespace Cell {
      */
     createCellFooter(): ICellFooter;
 
+    createInputCollapser(): InputCollapser;
+
+    createOutputCollapser(): OutputCollapser;
+
   }
 
   /**
@@ -492,6 +496,15 @@ namespace Cell {
       return new Stdin(options);
     }
 
+    createInputCollapser(): InputCollapser {
+      return new InputCollapser();
+    }
+
+    createOutputCollapser(): OutputCollapser {
+      return new OutputCollapser();
+    }
+
+
     private _editorFactory: CodeEditor.Factory = null;
   }
 
@@ -546,7 +559,7 @@ class CodeCell extends Cell {
     // Insert the output before the cell footer.
     let outputWrapper = this._outputWrapper = new Panel();
     outputWrapper.addClass(CELL_OUTPUT_WRAPPER_CLASS);
-    let outputCollapser = this._outputCollapser = new OutputCollapser();
+    let outputCollapser = this._outputCollapser = contentFactory.createOutputCollapser();
     outputCollapser.addClass(CELL_OUTPUT_COLLAPSER_CLASS);
     let output = this._output = new OutputArea({
       model: model.outputs,

@@ -40,7 +40,8 @@ import {
 import {
   ICellModel, Cell, IMarkdownCellModel,
   CodeCell, MarkdownCell,
-  ICodeCellModel, RawCell, IRawCellModel
+  ICodeCellModel, RawCell, IRawCellModel,
+  InputCollapser, OutputCollapser
 } from '@jupyterlab/cells';
 
 import {
@@ -62,6 +63,10 @@ import {
 import {
   INotebookModel
 } from './model';
+
+import {
+  NotebookInputCollapser, NotebookOutputCollapser
+} from './collapser';
 
 
 /**
@@ -1619,7 +1624,17 @@ namespace Notebook {
    * methods that create notebook content.
    */
   export
-  class ContentFactory extends StaticNotebook.ContentFactory { }
+  class ContentFactory extends StaticNotebook.ContentFactory {
+
+    createInputCollapser(): InputCollapser {
+      return new NotebookInputCollapser();
+    }
+
+    createOutputCollapser(): OutputCollapser {
+      return new NotebookOutputCollapser();
+    }
+
+  }
 
   /**
    * A namespace for the notebook content factory.

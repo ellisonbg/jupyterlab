@@ -455,7 +455,7 @@ export class Launcher extends VDomRenderer<LauncherModel> {
 
     // Wrap the sections in body and content divs.
     return (
-      <div>
+      <React.Fragment>
         <div className="jp-Launcher-toolbar">
           <div className="jp-Launcher-search-div">
             <input
@@ -477,7 +477,7 @@ export class Launcher extends VDomRenderer<LauncherModel> {
             {sections}
           </div>
         </div>
-      </div>
+      </React.Fragment>
     );
   }
 
